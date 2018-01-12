@@ -1,4 +1,5 @@
-ui =shinyUI(fluidPage(
+shinyApp(
+  ui =shinyUI(fluidPage(
     
     # Sidebar with a slider input for number of bins
     wellPanel(
@@ -11,8 +12,8 @@ ui =shinyUI(fluidPage(
     # Show a plot of the generated distribution
     mainPanel(
       plotOutput("leaflet_map")
-    )))
-server = shinyServer(function(input, output) {
+    ))),
+  server = shinyServer(function(input, output) {
     output$leaflet_map <- renderPlot(
       get(paste0("rsf_ind", input$ind))+
         facet_wrap(~score, scales = "free"), 
@@ -20,3 +21,5 @@ server = shinyServer(function(input, output) {
       
     )
   })
+  
+)
